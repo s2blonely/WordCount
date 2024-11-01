@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气查询表单</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .weather-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .weather-form {
+            margin-bottom: 20px;
+        }
+        .weather-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .weather-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .weather-form button:hover {
+            background-color: #0056b3;
+        }
+        .weather-result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="weather-container">
+    <h2>查询天气</h2>
+    <form class="weather-form" onsubmit="event.preventDefault(); getWeather()">
+        <input type="text" id="city-input" placeholder="请输入城市名" required>
+        <button type="submit">查询</button>
+    </form>
+    <div id="weather-result"></div>
+</div>
+
+<script>
+    function getWeather() {
+        var city = document.getElementById('city-input').value;
+        if (!city) {
+            alert('请输入城市名');
+            return;
+        }
+        // 这里应该添加调用天气API的代码
+        // 示例：$.ajax(...);
+        // 为了演示，我们使用一个静态的天气信息
+        var weatherInfo = {
+            city: "北京",
+            weather: "晴",
+            temperature: "25°C"
+        };
+        displayWeather(weatherInfo);
+    }
+
+    function displayWeather(weatherInfo) {
+        var resultDiv = document.getElementById('weather-result');
+        resultDiv.innerHTML = '<h3>天气信息</h3>' +
+            '<p><strong>城市:</strong> ' + weatherInfo.city + '</p>' +
+            '<p><strong>天气:</strong> ' + weatherInfo.weather + '</p>' +
+            '<p><strong>温度:</strong> ' + weatherInfo.temperature + '</p>';
+    }
+</script>
+
+</body>
+</html>

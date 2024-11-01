@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人所得税计算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .calculator {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 300px; /* 限制计算器宽度 */
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4cae4c;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <h2>个人所得税计算器</h2>
+  <input type="number" id="salary" placeholder="请输入工资金额" min="0">
+  <select id="taxRate">
+    <option value="0.03">3%</option>
+    <option value="0.1">10%</option>
+    <option value="0.15">15%</option>
+    <option value="0.2">20%</option>
+    <option value="0.25">25%</option>
+    <option value="0.3">30%</option>
+    <option value="0.35">35%</option>
+    <option value="0.45">45%</option>
+  </select>
+  <button onclick="calculateTax()">计算</button>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  function calculateTax() {
+    const salary = parseFloat(document.getElementById('salary').value);
+    const taxRate = parseFloat(document.getElementById('taxRate').value);
+    const taxFreeLimit = 5000; // 假设的免税额度
+    if (isNaN(salary) || isNaN(taxRate)) {
+      alert('请输入有效的工资金额和税率');
+      return;
+    }
+    const taxableIncome = salary - taxFreeLimit;
+    const tax = taxableIncome > 0 ? taxableIncome * taxRate : 0;
+    const netIncome = salary - tax;
+
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `税额: ${tax.toFixed(2)}元<br>净收入: ${netIncome.toFixed(2)}元`;
+  }
+</script>
+
+</body>
+</html>
